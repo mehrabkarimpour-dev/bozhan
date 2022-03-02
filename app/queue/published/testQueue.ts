@@ -1,12 +1,19 @@
-class TestQueue {
+import Queue from "../../../vendor/core/queue/queue";
+
+class TestQueue extends Queue {
 
     public name: string = 'testQueue'
-    public delay: number = 0
-    public attempts: number = 2
+    /*
+    *  you also can rewrite current queue config with down properties...
+    *
+       //   public delay: number = 1000  // ms
+       //   public removeOnComplete: boolean = true
+       //   public attempts: number = 2
+    *
+    * */
 
-
-    public handle() {
-        console.log('ok')
+    public handle(args: any) {
+        console.log(args)
     }
 
 }
