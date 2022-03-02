@@ -42,7 +42,6 @@ class Index {
 
 
     constructor() {
-        this.setGlobalMethods()
         this.setCli()
         this.setSchedule()
         this.setExpressConfig()
@@ -58,15 +57,6 @@ class Index {
 
     public setWebRtcConfig() {
         peer()
-    }
-
-    public setGlobalMethods() {
-        const testQueue = new Queue('', {
-            redis: {
-                port: 6379,
-                host: '127.0.0.1',
-            }
-        })
     }
 
     public setSchedule() {
