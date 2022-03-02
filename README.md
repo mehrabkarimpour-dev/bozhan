@@ -7,7 +7,7 @@ dependencies :
 - npm
 - typescript
 
-after clone , run :
+for develop bozhan framework run :
 
 - git clone  https://github.com/mehrabkarimpour-dev/bozhan.git
 
