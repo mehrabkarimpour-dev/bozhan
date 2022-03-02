@@ -4,6 +4,7 @@ BOZHAN framework
 
 dependencies : 
 - nodejs 
+- redis ( if you want using bozhan queue system )
 - npm
 - typescript
 
