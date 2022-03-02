@@ -1,0 +1,7 @@
+sequelize  db:migrate
+sequelize  db:migrate:undo
+
+sequelize seed:generate --name demo-user
+sequelize db:seed:all
+
+sequelize db:drop && sequelize db:create test

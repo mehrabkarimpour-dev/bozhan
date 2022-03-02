@@ -1,0 +1,4 @@
+sequelize model:generate --name Post --attributes title:string,description:string
+
+ in jwt.ts line 22  return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.ts');
+if your project has development that require files was ts else js...

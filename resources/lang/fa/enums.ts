@@ -1,0 +1,26 @@
+let enumsLang: any = {
+    IN_QUEUE: 'در صف',
+    DONE: 'انجام شده',
+    IN_PROCESS: 'در حال اجرا',
+    SKIPPED: 'رد شده',
+    TROUBLED: 'مشکل دار',
+    START: 'شروع ',
+    END: 'پایان',
+    ACTIVE: 'فعال',
+    DE_ACTIVE: 'غیر فعال',
+    RUNNING: 'در حال اجرا ',
+    CANCELLATION: 'لغو',
+    ALLOWED: 'مجاز',
+    NOT_ALLOWED: 'غیر مجاز',
+    PENDING: 'در انتظار',
+    ACCEPTED: 'پذیرفته شده ',
+    REJECTED: 'رد شد',
+    NEVER: 'هرگز',
+    HOURLY: 'ساعتی',
+    DAILY: 'روزانه',
+    EVERY_TWO_DAY: 'هر دو روز یکبار ',
+    EVERY_THREE_DAY: ' هر سه روز یکبار ',
+    WEEKLY: 'هفتگی',
+}
+
+export default enumsLang

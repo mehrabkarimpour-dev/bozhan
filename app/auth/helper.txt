@@ -1,0 +1,3 @@
+In the program we need to manage Authorization and we must be able to use different packages.
+ We used two packages, passport and JWT.
+ Jwt is enabled by default

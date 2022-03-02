@@ -1,0 +1,4 @@
+Enums have different uses. The best example for that is state of user that can pending or rejected or accepted
+the extra example :
+days of week : saturday , sunday...
+

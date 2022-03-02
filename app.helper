@@ -1,0 +1,4 @@
+comment types to read :
+   information : if you read this comments type is better , but is not any Coercion...
+   warning     : if you don't read this comments type , error in application is possible
+   force       : you must read this comments , Certainly your app dont running
