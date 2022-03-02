@@ -105,15 +105,16 @@ class Index {
 
     public setExpressConfig() {
         this.expressApp = http.createServer(app)
-        // this.expressApp.listen(appConfig.port, () => {
-        //     console.log('server running on port 5000 successfully...')
-        // })
         if (process.env.RELATION_BE_ACTIVE)
             db.sequelize.sync().then(() => {
                 this.expressApp.listen(appConfig.port, () => {
-                    console.log('server running on port 5000 successfully...')
+                    console.log(`server running on port ${process.env.APP_PORT || 5000} successfully...`)
                 })
             });
+        else
+            this.expressApp.listen(appConfig.port, () => {
+                console.log(`server running on port ${process.env.APP_PORT || 5000} successfully...`)
+            })
     }
 
     public setDatabaseConfig() {
