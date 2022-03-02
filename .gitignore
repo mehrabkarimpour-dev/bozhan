@@ -2,4 +2,3 @@
 .idea
 .env
 ./index.ts
-./storage/logs
