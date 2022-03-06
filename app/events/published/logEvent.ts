@@ -1,4 +1,4 @@
-import {Dispatchable} from "../../../vendor/core/event/Dispatchable";
+import {Dispatchable} from "vendor/core/event/Dispatchable";
 
 
 export class LogEvent extends Dispatchable {

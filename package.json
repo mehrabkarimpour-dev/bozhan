@@ -200,7 +200,7 @@
   },
   "keywords": [],
   "bin": {
-    "bozhan": "app/console/command/command.ts"
+    "bozhan": "app/console/command/command.js"
   },
   "author": "",
   "license": "ISC"

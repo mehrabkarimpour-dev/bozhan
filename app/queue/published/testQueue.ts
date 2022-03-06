@@ -1,4 +1,4 @@
-import Queue from "../../../vendor/core/queue/queue";
+import Queue from "vendor/core/queue/queue";
 
 class TestQueue extends Queue {
 
