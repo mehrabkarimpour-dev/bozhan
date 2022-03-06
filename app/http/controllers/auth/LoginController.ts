@@ -15,7 +15,7 @@ class LoginController extends Controller {
     public jwtAuth: any;
 
     constructor() {
-        super([]);
+        super();
         this.userRepository = injectableServiceProvider.bind(UserRepository);
         this.jwtAuth = injectableServiceProvider.bind(Jwt)
     }

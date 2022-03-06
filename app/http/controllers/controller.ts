@@ -10,7 +10,7 @@ export class Controller {
 
     //public repository;
 
-    constructor(modules: any) {
+    constructor() {
         //autoBind(this)
         this.recaptchaConfig()
     }

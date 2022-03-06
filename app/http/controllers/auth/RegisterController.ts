@@ -12,7 +12,7 @@ class RegisterController extends Controller {
     public userRepository: any;
 
     constructor() {
-        super([]);
+        super();
         this.userRepository = injectableServiceProvider.bind(UserRepository);
     }
 

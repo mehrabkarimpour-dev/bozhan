@@ -9,7 +9,7 @@ class VerificationController extends Controller {
 
 
     constructor() {
-        super([]);
+        super();
     }
 
     public async make(req: Request, res: Response, next: NextFunction) {

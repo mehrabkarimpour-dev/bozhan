@@ -9,8 +9,8 @@ export default abstract class ElasticAbstract {
         this.client = new Client({node: `${elasticConfig.url}:${elasticConfig.port}`})
     }
 
-    abstract search(index: string, match: object): any
+    abstract search(index: string, match: object): Promise<object | null>
 
-    abstract index(index: string, doc: object): any
+    abstract index(index: string, doc: object):  Promise<boolean | undefined | null>
 
 }

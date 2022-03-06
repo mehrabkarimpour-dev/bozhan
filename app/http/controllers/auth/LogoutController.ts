@@ -9,7 +9,7 @@ class LogoutController extends Controller {
     public jwtAuth: Auth;
 
     constructor() {
-        super([]);
+        super();
         this.jwtAuth = injectableServiceProvider.bind(Jwt)
     }
 
