@@ -92,11 +92,89 @@ async function queueMaker(argsArray) {
     editFile(argsArray[0], 'app/queue/published/' + argsArray[1] + '.ts', queueContent, argsArray[1], 'app/queue/published/')
 }
 
+async function typeormModelMaker(argsArray) {
+}
+
+async function mongooseModelMaker(argsArray) {
+}
+
+async function sequelizeModelMaker(argsArray) {
+
+    let fileName = getFileName(argsArray[2])
+
+    let sequelizeContent = "'use strict';\n" +
+        "import {Model} from 'sequelize';\n" +
+        "\n" +
+        "interface "+fileName+"Attributes {\n" +
+        "    id: string\n" +
+        "}\n" +
+        "\n" +
+        "module.exports = (Sequelize: any, DataTypes: any) => {\n" +
+        "\n" +
+        "\n" +
+        "    class "+fileName+" extends Model<"+fileName+"Attributes> implements "+fileName+"Attributes {\n" +
+        "        /**\n" +
+        "         * Helper method for defining associations.\n" +
+        "         * This method is not a part of Sequelize lifecycle.\n" +
+        "         * The `database/index` file will call this method automatically.\n" +
+        "         */\n" +
+        "\n" +
+        "        id!: string\n" +
+        "\n" +
+        "        static associate(models: any) {\n" +
+        "          \n" +
+        "        }\n" +
+        "    }\n" +
+        "\n" +
+        "\n" +
+        "    "+fileName+".init({\n" +
+        "        id: {\n" +
+        "            allowNull: false,\n" +
+        "            autoIncrement: true,\n" +
+        "            primaryKey: true,\n" +
+        "            type: DataTypes.INTEGER,\n" +
+        "            validate: {\n" +
+        "                notEmpty: true\n" +
+        "            }\n" +
+        "        }\n" +
+        "    }, {\n" +
+        "        sequelize: Sequelize,\n" +
+        "        modelName: '"+fileName+"',\n" +
+        "        tableName: '"+fileName+"s'\n" +
+        "    });\n" +
+        "\n" +
+        "\n" +
+        "    return "+fileName+"\n" +
+        "}\n"
+    editFile(argsArray[0], 'app/models/sequelize/' + argsArray[2] + '.ts', sequelizeContent, argsArray[2], 'app/models/sequelize/')
+}
+
+
+let modelsMakeAbles = {
+    sequelize: sequelizeModelMaker,
+    typeorm: typeormModelMaker,
+    mongoose: mongooseModelMaker,
+}
+
+async function modelMaker(argsArray) {
+    if (modelsMakeAbles[argsArray[1]]) {
+        return modelsMakeAbles[argsArray[1]](argsArray)
+    }
+    console.log(chalk.red(`${argsArray[1]} not found ! `))
+    console.log(chalk.yellow(`only the following are supported : `))
+    let makeAbleModels = Object.keys(modelsMakeAbles)
+    for (let i = 0; i < makeAbleModels.length; i++) {
+        console.log(chalk.blue(`${makeAbleModels[i]}`))
+    }
+}
+
+
 let makeAbles = {
     event: eventMaker,
     listener: listenerMaker,
     controller: controllerMaker,
-    queue: queueMaker
+    queue: queueMaker,
+    model: modelMaker
 }
 
 program.command('make <type>')

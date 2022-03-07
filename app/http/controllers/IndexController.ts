@@ -13,7 +13,7 @@ class IndexController extends Controller {
 
 
     constructor() {
-        super([]);
+        super();
         this.userRepository = injectableServiceProvider.bind(UserRepository);
     }
 
