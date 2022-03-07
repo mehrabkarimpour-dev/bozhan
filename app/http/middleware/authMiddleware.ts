@@ -1,11 +1,10 @@
 import {NextFunction, Request, Response} from "express"
-import {setAuth} from "../../../../vendor/core/autoload/auth"
+import {setAuth} from "vendor/core/autoload/auth"
 import jwt from "jsonwebtoken"
-import appConfig from "../../../../config/app"
+import appConfig from "config/app"
 
 
 export class AuthMiddleware {
-
 
 
     public static _name: string = 'auth'
@@ -27,12 +26,10 @@ export class AuthMiddleware {
         if (req.headers.authorization && req.headers?.authorization?.split('Bearer')[1]) {
             try {
                 const token = req.headers.authorization.split(" ")[1];
-                const auth = jwt.verify(token, appConfig.secretKey);
-                //@ts-ignore
+                const auth: any = jwt.verify(token, appConfig.secretKey);
+
                 if (auth && auth.dataValues) {
-                    //@ts-ignore
                     setAuth(auth.dataValues)
-                    //@ts-ignore
                     req.auth = auth.dataValues
                     return next()
                 } else {

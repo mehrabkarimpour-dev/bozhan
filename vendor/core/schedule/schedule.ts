@@ -1,18 +1,14 @@
 import cron from 'node-cron'
-import TestJob from "./jobs/TestJob";
+import {_jobs} from "../../../app/providers/AppContainer";
 
 export class Schedule {
     constructor() {
     }
 
-    public registerJobs() {
-        return [
-            TestJob
-        ]
-    }
+
 
     public run() {
-        this.registerJobs().map(job => {
+        _jobs.map(job => {
             // @ts-ignore
             let _obg = new job()
             cron.schedule(_obg.cronTime, () => {

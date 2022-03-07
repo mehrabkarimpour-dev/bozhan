@@ -1,8 +1,10 @@
 import Queue from "vendor/core/queue/queue";
+import logger from "../../config/logger";
 
 class TestQueue extends Queue {
 
     public name: string = 'testQueue'
+    public delay: number = 1000  // ms
     /*
     *  you also can rewrite current queue config with down properties...
     *
@@ -13,7 +15,7 @@ class TestQueue extends Queue {
     * */
 
     public handle(args: any) {
-        console.log(args)
+        logger.info(args)
     }
 
 }

@@ -1,60 +1,56 @@
 import {NextFunction, Request, Response} from "express";
-import AuthCache from "../../../../vendor/core/cache/authCache";
-import db from "../../../models/sequelize";
+import AuthCache from "vendor/core/cache/authCache";
+import db from "app/models/sequelize";
 import Middleware from "./Middleware";
+import {Auth} from "vendor/core/autoload/auth";
 
 
-export class PermissionMiddleware extends Middleware {
+export class RoleMiddleware {
 
 
-
-    public static _name: string = 'permission'
+    public static _name: string = 'role'
     public static hasParams: boolean = true
     public static parameters: any = null
 
     /**
      * if params be equal to true for getting params you need public params() method...
+     *    public params(param : string) {
+     *
+     *    }
      */
 
     constructor(parameters: object | string | null = null) {
-        super();
-        PermissionMiddleware.parameters = parameters
+        RoleMiddleware.parameters = parameters
     }
 
-    public static async hasPermission(req: Request) {
+
+    public static async hasRole(req: Request) {
         let role = await db.User.findOne({
             include: {
-                association: 'permissions',
+                association: 'roles',
                 where: {
-                    key: this.parameters
+                    key: RoleMiddleware.parameters
                 }
             },
             where: {
                 // @ts-ignore
-                id: req.auth.id
+                id: Auth().id
             },
             attributes: ['id'],
         })
         // @ts-ignore
-        console.log(this.parameters)
-        // @ts-ignore
-        return req.auth.permissions = role?.dataValues?.permissions ?? null
+        return req.auth.roles = role?.dataValues?.roles ?? null
     }
 
-
     public async run(req: Request, res: Response, next: NextFunction) {
-
         // @ts-ignore
         if (!req.auth) return Middleware.needAuth(req, res)
 
-        await PermissionMiddleware.hasPermission(req)
-
+        await RoleMiddleware.hasRole(req)
         // @ts-ignore
-        if (req.auth.permissions)
+        if (req.auth.roles)
             return next()
-        // @ts-ignore
-        console.log(req.auth.permissions)
-        return res.status(403).json({
+        else return res.status(403).send({
             status: false,
             message: 'دسترسی غیر مجاز',
             data: null

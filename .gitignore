@@ -1,4 +1,5 @@
 /node_modules
 .idea
+storage/logs
 .env
 ./index.ts

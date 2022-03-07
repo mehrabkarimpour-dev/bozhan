@@ -3,7 +3,7 @@ import express, {NextFunction, Request, request, Response, response} from 'expre
 import db from '../app/models/sequelize';
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import appConfig from "../config/app";
+import appConfig from "config/app";
 import databaseConfig from '../config/database'
 import Passport from "../app/auth/passport";
 import Queue from 'bull';
@@ -13,7 +13,6 @@ const flash = require('connect-flash')
 const passport = require('passport')
 require('dotenv').config()
 const session = require('express-session')
-import emitter from "../app/events";
 import Config from "../vendor/config/Config"
 import http from 'http';
 import webRouter from '../route/web/index';
@@ -27,12 +26,13 @@ import {schema, root} from "../app/graphql/schema";
 /*import graphqlHttp from "express-graphql";*/
 import welcome from "../vendor/core/cli/welcome";
 import cli from "../vendor/core/cli/cli";
-import {Schedule} from "../app/schedule/schedule";
 import {redisConfig} from "../config/database";
 import {injectableServiceProvider} from "../app/providers/injectableServiceProvider";
 import * as redis from 'redis';
 import declares from "../app/@types";
 import peer from "../app/web-rtc/peer";
+import chalk from "chalk";
+import {Schedule} from "../vendor/core/schedule/schedule";
 
 const app = express()
 
@@ -98,12 +98,12 @@ class Index {
         if (process.env.RELATION_BE_ACTIVE)
             db.sequelize.sync().then(() => {
                 this.expressApp.listen(appConfig.port, () => {
-                    console.log(`server running on port ${process.env.APP_PORT || 5000} successfully...`)
+                    console.log(chalk.blue(`express server running on port ${process.env.APP_PORT || 5000} successfully...`))
                 })
             });
         else
             this.expressApp.listen(appConfig.port, () => {
-                console.log(`server running on port ${process.env.APP_PORT || 5000} successfully...`)
+                console.log(chalk.blue(`express running on port ${process.env.APP_PORT || 5000} successfully...`))
             })
     }
 
@@ -142,7 +142,7 @@ class Index {
 
         declares(app)
         app.use(bodyParser.json())
-        app.use(bodyParser.urlencoded())
+        app.use(bodyParser.urlencoded({ extended: true }))
         //app.use(validator())
 
         app.use(session({

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 const {exec} = require('child_process')
-let fs = require('fs');
-let program = require('commander');
-const chalk = require('chalk');
-const figlet = require('figlet');
+let fs = require('fs')
+let program = require('commander')
+const chalk = require('chalk')
+const figlet = require('figlet')
+const path = require("path");
 
 
 program
@@ -12,9 +13,23 @@ program
         console.log(chalk.blue(figlet.textSync('P O N G', {horizontalLayout: 'full'})))
     })
 program
-    .command('run')
-    .action(function () {
-        console.log('run')
+    .command('run <command>')
+    .action(function (commandName) {
+        commandName += '.ts'
+        let commandDosNotExists = true
+        fs.readdirSync(__dirname).filter((file) => {
+            return (file.indexOf('.') !== 0) && (file.slice(-3) === '.ts')
+        }).forEach((file) => {
+
+            if (file === commandName) {
+                commandDosNotExists = false
+            }
+            exec("node app/console/command/supervisor.js --name=" + commandName)
+            // exec("ts-node -e 'require('node app/console/command/" + file + "').run()'")
+        })
+        if (commandDosNotExists) {
+            console.log(chalk.red('command ' + commandName + ' not found !'))
+        }
     })
 
 function checkDirectoryExists(path, pathForCreate) {
@@ -62,7 +77,7 @@ function getFileName(filePath) {
 function eventMaker(argsArray) {
     let fileName = getFileName(argsArray[1])
     let content = "import {Dispatchable} from 'vendor/core/event/Dispatchable';\n\nexport class " + fileName + " extends Dispatchable {\n\n    public name: string = '" + fileName + "'\n\n\n    public registerListeners()\n{\n        return [\n\n        ]\n\n    }\n\n    public run(...parameters: any) {\n\n    }\n\n}"
-    editFile(argsArray[0], 'app/events/published/' + argsArray[1] + '.ts', content, argsArray[1], 'app/events/published/')
+    editFile(argsArray[0], 'app/events/' + argsArray[1] + '.ts', content, argsArray[1], 'app/events/')
 }
 
 async function listenerMaker(argsArray) {
@@ -89,7 +104,7 @@ async function queueMaker(argsArray) {
         "    *\n" +
         "    * */\n" +
         "    public handle(args: any) {\n\n\n   } \n\n}\n\n export default " + fileName + ""
-    editFile(argsArray[0], 'app/queue/published/' + argsArray[1] + '.ts', queueContent, argsArray[1], 'app/queue/published/')
+    editFile(argsArray[0], 'app/queue/' + argsArray[1] + '.ts', queueContent, argsArray[1], 'app/queue/')
 }
 
 async function typeormModelMaker(argsArray) {
@@ -169,7 +184,7 @@ async function middlewareMaker(argsArray) {
         "     * Middleware can be calling in routes...\n" +
         "     *\n" +
         "     */ \n  \n     constructor(parameters: object | string | null = null) { \n         " + fileName + ".parameters = parameters \n     } \n  \n  \n     public async run(req: Request, res: Response, next: NextFunction) { \n         return next() \n     } \n  \n  }"
-    editFile(argsArray[0], 'app/http/middleware/published/' + argsArray[1] + '.ts', queueContent, argsArray[1], 'app/http/middleware/published/')
+    editFile(argsArray[0], 'app/http/middleware/' + argsArray[1] + '.ts', queueContent, argsArray[1], 'app/http/middleware/')
 }
 
 async function requestMaker(argsArray) {
@@ -193,7 +208,7 @@ async function jobMaker(argsArray) {
         "    *      second  minute   hour   day of month.   month   day of week\n" +
         "    *         *      *       *          *           *          *\n" +
         "    * */  \n     public cronTime: string = everyHour() \n  \n     public index = async () => { \n  \n  \n  \n   } \n } \n \n export default " + fileName + ""
-    editFile(argsArray[0], 'app/schedule/jobs/' + argsArray[1] + '.ts', jobContent, argsArray[1], 'app/schedule/jobs/')
+    editFile(argsArray[0], 'app/schedule/' + argsArray[1] + '.ts', jobContent, argsArray[1], 'app/schedule/')
 }
 
 async function modelMaker(argsArray) {

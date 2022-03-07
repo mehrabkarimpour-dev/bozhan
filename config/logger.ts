@@ -1,10 +1,9 @@
 import logger from "pino";
 import dayjs from "dayjs";
 
-
 const log = logger({
         messageKey: process.env.MESSAGE_KEY || 'msg',
-        levelKey: process.env.LEVEL_KEY || 'level',
+        //levelKey: process.env.LEVEL_KEY || 'level',
         // @ts-ignore
         messageFormat: `id:{reqId}  time:{responseTime}`,
         timestampKey: process.env.TIMESTAMPE_KEY || 'time',

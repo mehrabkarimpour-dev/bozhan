@@ -68,7 +68,7 @@
     "encodeurl": "^1.0.2",
     "escape-html": "^1.0.3",
     "etag": "^1.8.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-ejs-layouts": "^2.5.1",
     "express-graphql": "^0.12.0",
     "express-jwt": "^6.1.0",

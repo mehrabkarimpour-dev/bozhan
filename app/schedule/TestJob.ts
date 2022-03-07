@@ -1,4 +1,4 @@
-import axios from "axios";
+import logger from "../../config/logger";
 
 class TestJob {
 
@@ -10,7 +10,7 @@ class TestJob {
     public cronTime: string = '*/1 * * * * *'
 
     public index = async () => {
-        // some code
+
     }
 }
 
