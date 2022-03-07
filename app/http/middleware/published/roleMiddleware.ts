@@ -8,8 +8,8 @@ import emitter from "../../../events";
 
 export class RoleMiddleware {
 
-    // @ts-ignore
-    public static name: string = 'role'
+
+    public static _name: string = 'role'
     public static hasParams: boolean = true
     public static parameters: any = null
 

@@ -7,8 +7,8 @@ import Middleware from "./Middleware";
 export class PermissionMiddleware extends Middleware {
 
 
-    // @ts-ignore
-    public static name: string = 'permission'
+
+    public static _name: string = 'permission'
     public static hasParams: boolean = true
     public static parameters: any = null
 

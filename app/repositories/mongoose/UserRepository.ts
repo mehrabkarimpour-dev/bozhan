@@ -1,8 +1,7 @@
 import {BaseRepository} from "./BaseRepository";
 import UserRepositoryInterface from "../UserRepositoryInterface";
-import user from '../../models/mogoose/user'
-import bcrypt from 'bcryptjs'
-import logger from "../../../config/logger";
+import user from 'app/models/mongoose/user'
+
 
 export class UserRepository extends BaseRepository implements UserRepositoryInterface {
 

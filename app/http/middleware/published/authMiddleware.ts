@@ -1,16 +1,14 @@
-import {NextFunction, Request, Response} from "express";
-import AuthCache from "../../../../vendor/core/cache/authCache";
-import {setAuth} from "../../../../vendor/core/autoload/auth";
-import {successShow} from "../../../../resources/lang/fa/messages/apiMessages";
-import jwt from "jsonwebtoken";
-import appConfig from "../../../../config/app";
+import {NextFunction, Request, Response} from "express"
+import {setAuth} from "../../../../vendor/core/autoload/auth"
+import jwt from "jsonwebtoken"
+import appConfig from "../../../../config/app"
 
 
 export class AuthMiddleware {
 
 
-    // @ts-ignore
-    public static name: string = 'auth'
+
+    public static _name: string = 'auth'
     public static hasParams: boolean = false
     public static parameters: any = null
 

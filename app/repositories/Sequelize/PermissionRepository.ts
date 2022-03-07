@@ -1,4 +1,4 @@
-import {BaseRepository} from "./BaseRepository";
+import {BaseRepository} from "app/repositories/Sequelize/BaseRepository";
 import db from '../../models/sequelize';
 import PermissionRepositoryInterface from "../PermissionRepositoryInterface";
 

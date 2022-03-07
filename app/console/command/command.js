@@ -61,7 +61,7 @@ function getFileName(filePath) {
 
 function eventMaker(argsArray) {
     let fileName = getFileName(argsArray[1])
-    let content = "import {Dispatchable} from 'vendor/core/event/Dispatchable';\n\nexport class " + fileName + " extends Dispatchable {\n\n    public name: string = '" + argsArray[1] + "'\n\n\n    public registerListeners()\n{\n        return [\n\n        ]\n\n    }\n\n    public run(...parameters: any) {\n\n    }\n\n}"
+    let content = "import {Dispatchable} from 'vendor/core/event/Dispatchable';\n\nexport class " + fileName + " extends Dispatchable {\n\n    public name: string = '" + fileName + "'\n\n\n    public registerListeners()\n{\n        return [\n\n        ]\n\n    }\n\n    public run(...parameters: any) {\n\n    }\n\n}"
     editFile(argsArray[0], 'app/events/published/' + argsArray[1] + '.ts', content, argsArray[1], 'app/events/published/')
 }
 
@@ -79,7 +79,7 @@ async function controllerMaker(argsArray) {
 
 async function queueMaker(argsArray) {
     let fileName = getFileName(argsArray[1])
-    let queueContent = "import Queue from 'vendor/core/queue/queue'; \n\n class " + fileName + " extends Queue { \n\n    public name: string = '" + argsArray[1] + "'\n" +
+    let queueContent = "import Queue from 'vendor/core/queue/queue'; \n\n class " + fileName + " extends Queue { \n\n    public name: string = '" + fileName + "'\n" +
         "    /*\n" +
         "    *  you also can rewrite current queue config with down properties...\n" +
         "    *\n" +
@@ -93,9 +93,15 @@ async function queueMaker(argsArray) {
 }
 
 async function typeormModelMaker(argsArray) {
+    let fileName = getFileName(argsArray[2])
+    let typeormContent = "import {Entity, Column, PrimaryColumn} from \"typeorm\"; \n  \n  \n @Entity() \n class " + fileName + " { \n  \n     @Column() \n     id: number | undefined; \n } \n  \n  \n export default " + fileName + ""
+    editFile(argsArray[0], 'app/models/typeorm/' + argsArray[2] + '.ts', typeormContent, argsArray[2], 'app/models/typeorm/')
 }
 
 async function mongooseModelMaker(argsArray) {
+    let fileName = getFileName(argsArray[2])
+    let mongooseContent = "import {Schema, model} from 'mongoose'; \n  \n interface " + fileName + " { \n   } \n  \n  \n const schema = new Schema<" + fileName + ">({ \n      }) \n  \n  \n  \n export default model<" + fileName + ">('" + fileName + "', schema)"
+    editFile(argsArray[0], 'app/models/mongoose/' + argsArray[2] + '.ts', mongooseContent, argsArray[2], 'app/models/mongoose/')
 }
 
 async function sequelizeModelMaker(argsArray) {
@@ -105,14 +111,14 @@ async function sequelizeModelMaker(argsArray) {
     let sequelizeContent = "'use strict';\n" +
         "import {Model} from 'sequelize';\n" +
         "\n" +
-        "interface "+fileName+"Attributes {\n" +
+        "interface " + fileName + "Attributes {\n" +
         "    id: string\n" +
         "}\n" +
         "\n" +
         "module.exports = (Sequelize: any, DataTypes: any) => {\n" +
         "\n" +
         "\n" +
-        "    class "+fileName+" extends Model<"+fileName+"Attributes> implements "+fileName+"Attributes {\n" +
+        "    class " + fileName + " extends Model<" + fileName + "Attributes> implements " + fileName + "Attributes {\n" +
         "        /**\n" +
         "         * Helper method for defining associations.\n" +
         "         * This method is not a part of Sequelize lifecycle.\n" +
@@ -127,7 +133,7 @@ async function sequelizeModelMaker(argsArray) {
         "    }\n" +
         "\n" +
         "\n" +
-        "    "+fileName+".init({\n" +
+        "    " + fileName + ".init({\n" +
         "        id: {\n" +
         "            allowNull: false,\n" +
         "            autoIncrement: true,\n" +
@@ -139,12 +145,12 @@ async function sequelizeModelMaker(argsArray) {
         "        }\n" +
         "    }, {\n" +
         "        sequelize: Sequelize,\n" +
-        "        modelName: '"+fileName+"',\n" +
-        "        tableName: '"+fileName+"s'\n" +
+        "        modelName: '" + fileName + "',\n" +
+        "        tableName: '" + fileName + "s'\n" +
         "    });\n" +
         "\n" +
         "\n" +
-        "    return "+fileName+"\n" +
+        "    return " + fileName + "\n" +
         "}\n"
     editFile(argsArray[0], 'app/models/sequelize/' + argsArray[2] + '.ts', sequelizeContent, argsArray[2], 'app/models/sequelize/')
 }
@@ -154,6 +160,40 @@ let modelsMakeAbles = {
     sequelize: sequelizeModelMaker,
     typeorm: typeormModelMaker,
     mongoose: mongooseModelMaker,
+}
+
+async function middlewareMaker(argsArray) {
+    let fileName = getFileName(argsArray[1])
+    let queueContent = "import {NextFunction, Request, Response} from 'express' \n  \n  \n export class " + fileName + " { \n  \n  \n     public static _name: string = 'role' \n     public static hasParams: boolean = true \n     public static parameters: any = null \n  \n \n" +
+        "    /**\n" +
+        "     * Middleware can be calling in routes...\n" +
+        "     *\n" +
+        "     */ \n  \n     constructor(parameters: object | string | null = null) { \n         " + fileName + ".parameters = parameters \n     } \n  \n  \n     public async run(req: Request, res: Response, next: NextFunction) { \n         return next() \n     } \n  \n  }"
+    editFile(argsArray[0], 'app/http/middleware/published/' + argsArray[1] + '.ts', queueContent, argsArray[1], 'app/http/middleware/published/')
+}
+
+async function requestMaker(argsArray) {
+    let fileName = getFileName(argsArray[1])
+    let queueContent = "import {RequestsForm} from 'app/http/requests/Requests' \n import {NextFunction, Request, Response} from 'express' \n  \n  \n class " + fileName + " extends RequestsForm { \n  \n     public static params: any = null \n  \n     constructor() { \n         super(); \n     } \n  \n     public static validParams: object = [ \n           \n     ] \n  \n  \n     public static _name: string = '" + fileName + "' \n  \n     public validate() { \n         return [ \n            \n         ] \n     } \n  \n     public handle(req: Request, res: Response, next: NextFunction) { \n         return next() \n     } \n } \n  \n export default " + fileName + " "
+    editFile(argsArray[0], 'app/http/requests/' + argsArray[1] + '.ts', queueContent, argsArray[1], 'app/http/requests/')
+}
+
+async function enumMaker(argsArray) {
+    let fileName = getFileName(argsArray[1])
+    let enumContent = "enum " + fileName + " { \n\n }"
+    editFile(argsArray[0], 'app/enums/' + argsArray[1] + '.ts', enumContent, argsArray[1], 'app/enums/')
+}
+
+async function jobMaker(argsArray) {
+    let fileName = getFileName(argsArray[1])
+    let jobContent = "\n" +
+        "import {everyHour} from 'vendor/core/autoload/job/jobTime'; \n  \n class " + fileName + " { \n \n" +
+        "    /*\n" +
+        "    *   set cron job time .\n" +
+        "    *      second  minute   hour   day of month.   month   day of week\n" +
+        "    *         *      *       *          *           *          *\n" +
+        "    * */  \n     public cronTime: string = everyHour() \n  \n     public index = async () => { \n  \n  \n  \n   } \n } \n \n export default " + fileName + ""
+    editFile(argsArray[0], 'app/schedule/jobs/' + argsArray[1] + '.ts', jobContent, argsArray[1], 'app/schedule/jobs/')
 }
 
 async function modelMaker(argsArray) {
@@ -174,14 +214,25 @@ let makeAbles = {
     listener: listenerMaker,
     controller: controllerMaker,
     queue: queueMaker,
-    model: modelMaker
+    model: modelMaker,
+    middleware: middlewareMaker,
+    request: requestMaker,
+    enum: enumMaker,
+    job: jobMaker
 }
 
 program.command('make <type>')
     .action(async function (args) {
         let argsArray = args.split(':')
 
-        if (!argsArray[1]) return console.log(chalk.red(`name ${argsArray[0]} is required !`))
+        if (!argsArray[1]) {
+            let makeA = Object.keys(makeAbles)
+            console.log(chalk.red(` What do you want to make ? `))
+            for (let i = 0; i < makeA.length; i++) {
+                console.log(chalk.blue(`${makeA[i]}`))
+            }
+            return
+        }
         if (makeAbles[argsArray[0]]) {
             return makeAbles[argsArray[0]](argsArray)
         }
