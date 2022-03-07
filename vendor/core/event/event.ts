@@ -1,11 +1,6 @@
-import events from "node:events"
-import {injectableServiceProvider} from "../providers/injectableServiceProvider";
-import {LogEvent} from "./published/logEvent";
-
-const registerEvents = [
-    LogEvent
-]
-
+import events from "node:events";
+import {injectableServiceProvider} from "../../../app/providers/injectableServiceProvider";
+import {_events} from "../../../app/providers/AppContainer";
 
 class index extends events {
 }
@@ -13,7 +8,7 @@ class index extends events {
 const Event = injectableServiceProvider.bind(index);
 
 
-registerEvents.map(event => {
+_events.map(event => {
     let _EventObj = injectableServiceProvider.bind(event)
     Event.on(_EventObj.name, (...args: any) => {
         setTimeout(() => {

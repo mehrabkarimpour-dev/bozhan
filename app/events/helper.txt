@@ -1,6 +1,0 @@
-we can define any event in published directory , any event has two function :
-
-1- registerListeners()  all listeners that should listen to  event are registered in this function
-2- run()                this method runs after emitting  event
-
-events and listeners runs on background...
