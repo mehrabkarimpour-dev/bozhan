@@ -13,6 +13,8 @@ const flash = require('connect-flash')
 const passport = require('passport')
 require('dotenv').config()
 const session = require('express-session')
+const routeCache = require('route-cache')
+
 import Config from "../vendor/config/Config"
 import http from 'http';
 import webRouter from '../route/web/index';
@@ -125,7 +127,7 @@ class Index {
     }
 
     public setRoutersConfig() {
-        app.use(webRouter)
+        app.use(webRouter, routeCache.cacheSeconds(24 * 60 * 60 * 60, process.env.APP_KEY || 'app_key'))
         // app.use('/api', apiRouter)
     }
 
@@ -142,7 +144,7 @@ class Index {
 
         declares(app)
         app.use(bodyParser.json())
-        app.use(bodyParser.urlencoded({ extended: true }))
+        app.use(bodyParser.urlencoded({extended: true}))
         //app.use(validator())
 
         app.use(session({
