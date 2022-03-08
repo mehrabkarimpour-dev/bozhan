@@ -1,3 +1,0 @@
-The program may need to change the type of variables, objects and anything
-In ./index.ts file you can change type of anything
-For example, we added Auth property to Request express to handle user that is login
