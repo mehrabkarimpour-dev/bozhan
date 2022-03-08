@@ -5,23 +5,42 @@ import {RoleMiddleware} from "../http/middleware/roleMiddleware";
 import {PermissionMiddleware} from "../http/middleware/permissionMiddleware";
 import TestJob from "../schedule/TestJob";
 import TestQueue from "../queue/testQueue";
-import TestCommand from "../console/command/testCommand";
 
-export const _events: Array<object> = [
-    LogEvent
-]
-export const _middlewares: Array<object> = [
-    AuthMiddleware,
-    loginRequest,
-    RoleMiddleware,
-    PermissionMiddleware
-]
-export const _jobs: Array<object> = [
-    TestJob
-]
-export const _queues: Array<object> = [
-    TestQueue
-]
-export const _commands: Array<object> = [
-    TestCommand
-]
+/**
+ * Bozhan container namespace
+ */
+export namespace Container {
+    /**
+     * events
+     */
+    export const _events: Array<object> = [
+        LogEvent
+    ]
+    /**
+     * middlewares
+     */
+    export const _middlewares: Array<any> = [
+        AuthMiddleware,
+        loginRequest,
+        RoleMiddleware,
+        PermissionMiddleware
+    ]
+    /**
+     * jobs
+     */
+    export const _jobs: Array<object> = [
+        TestJob
+    ]
+    /**
+     * queues
+     */
+    export const _queues: Array<object> = [
+        TestQueue
+    ]
+    /**
+     * commands
+     */
+    export const _commands: Array<object> = []
+}
+
+

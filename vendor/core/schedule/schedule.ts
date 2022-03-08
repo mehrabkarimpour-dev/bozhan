@@ -1,5 +1,6 @@
 import cron from 'node-cron'
-import {_jobs} from "../../../app/providers/AppContainer";
+import {Container} from "../../../app/providers/AppContainer";
+
 
 export class Schedule {
     constructor() {
@@ -8,7 +9,7 @@ export class Schedule {
 
 
     public run() {
-        _jobs.map(job => {
+        Container._jobs.map(job => {
             // @ts-ignore
             let _obg = new job()
             cron.schedule(_obg.cronTime, () => {

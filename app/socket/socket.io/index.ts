@@ -1,7 +1,6 @@
 import * as socketIo from "socket.io";
 import Socket from "../../../vendor/core/socket/Socket";
 import SocketInterface from "../../../vendor/core/socket/SocketInterface";
-import * as fs from "fs";
 
 
 class SocketIo extends Socket implements SocketInterface {
@@ -17,7 +16,7 @@ class SocketIo extends Socket implements SocketInterface {
         Socket.setChannel('online')
 
         this.ws.on('connection', (socket: any) => {
-            // we has new connection
+            // we have a  new connection
         })
     }
 }

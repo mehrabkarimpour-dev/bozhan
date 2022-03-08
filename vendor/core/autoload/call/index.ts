@@ -1,4 +1,4 @@
-import {_middlewares} from "../../../../app/providers/AppContainer";
+import {Container} from "../../../../app/providers/AppContainer";
 
 
 export function controller(controller: any, method: string) {
@@ -18,7 +18,7 @@ export function handleErrors(validation: any) {
 
 
 export function middleware(middleware: string, parameters: any = null) {
-    let middlewareCls = _middlewares.find((_middleware: any) => _middleware._name === middleware)
+    let middlewareCls = Container._middlewares.find((_middleware: any) => _middleware._name === middleware)
     if (middlewareCls) {
         middlewareCls.hasParams ? middlewareCls = new middlewareCls(parameters) : middlewareCls = new middlewareCls()
         return middlewareCls.run

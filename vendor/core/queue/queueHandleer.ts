@@ -1,5 +1,5 @@
 import Queue from "bull";
-import {_queues} from "../../../app/providers/AppContainer";
+import {Container} from "../../../app/providers/AppContainer";
 
 let Queues: any = {}
 let queueDriverRedis: any = {
@@ -8,7 +8,7 @@ let queueDriverRedis: any = {
     password: 'root'*/
 }
 
-_queues.map((queue: any) => {
+Container._queues.map((queue: any) => {
     let queueObj = new queue()
     let newQueue = new Queue(queueObj.name, {
         redis: queueDriverRedis
