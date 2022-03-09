@@ -211,6 +211,12 @@ async function jobMaker(argsArray) {
     editFile(argsArray[0], 'app/schedule/' + argsArray[1] + '.ts', jobContent, argsArray[1], 'app/schedule/')
 }
 
+async function fsMaker(argsArray) {
+    let fileName = getFileName(argsArray[1])
+    let fsContent = "class " + fileName + " { \n  \n     public static _name: string = '"+ fileName +  "' \n  \n     public path: string = '/app/panel/' \n  \n     public fileSavingName: string = 'originalName' \n } \n  \n  export default " + fileName + ""
+    editFile(argsArray[0], 'app/fs/' + argsArray[1] + '.ts', fsContent, argsArray[1], 'app/fs/')
+}
+
 async function modelMaker(argsArray) {
     if (modelsMakeAbles[argsArray[1]]) {
         return modelsMakeAbles[argsArray[1]](argsArray)
@@ -233,7 +239,8 @@ let makeAbles = {
     middleware: middlewareMaker,
     request: requestMaker,
     enum: enumMaker,
-    job: jobMaker
+    job: jobMaker,
+    uploader: fsMaker
 }
 
 program.command('make <type>')
