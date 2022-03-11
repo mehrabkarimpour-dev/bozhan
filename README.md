@@ -24,6 +24,6 @@ for develop bozhan framework run this commands :
 
 ______________________________________
 documentation : 
-![GitHub Dark](https://getbozhan.com/github-dark.png#gh-light-mode-only)
+![getbozhan.com](https://getbozhan.com#gh-light-mode-only)
             
             
