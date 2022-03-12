@@ -1,6 +1,7 @@
 export class Dispatchable {
 
     private parameters: any
+    public runInBackground: boolean = true
 
     public setParameters(...parameters: any) {
         return this.parameters = parameters
