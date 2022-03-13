@@ -6,6 +6,7 @@ import {PermissionMiddleware} from "../http/middleware/permissionMiddleware";
 import TestJob from "../schedule/TestJob";
 import TestQueue from "../queue/testQueue";
 import UploadImage from "../fs/uploadImage";
+import testExport from "../export/testExport";
 
 /**
  * Bozhan container namespace
@@ -47,6 +48,12 @@ export namespace Container {
      */
     export const _uploads: Array<object> = [
         UploadImage
+    ]
+    /**
+     * exports
+     */
+    export const _exports: Array<object> = [
+        testExport
     ]
 
 }

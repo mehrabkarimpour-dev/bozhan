@@ -1,5 +1,4 @@
 /node_modules
 .idea
-storage/app/*
 .env
 ./index.ts
