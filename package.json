@@ -1,5 +1,6 @@
 {
   "name": "bozhan",
+  "type": "commonjs",
   "module": "module",
   "version": "1.0.0",
   "description": "",

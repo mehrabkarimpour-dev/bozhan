@@ -14,7 +14,9 @@ export class LogEvent extends Dispatchable {
     }
 
     public run(...parameters: any) {
-        // some code
+        for (let i = 0; i < 100000; i++) {
+            console.log(i)
+        }
     }
 
 

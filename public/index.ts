@@ -105,7 +105,10 @@ class Index {
             });
         else
             this.expressApp.listen(appConfig.port, () => {
-                console.log(chalk.blue(`express running on port ${process.env.APP_PORT || 5000} successfully...`))
+                console.log(chalk.blue(` server : express`))
+                console.log(chalk.blue(` port : ${process.env.APP_PORT || 5000}`))
+                console.log(chalk.blue(` HOST : ${process.env.HOST || 'localhost'}`))
+                console.log(chalk.blue('***********************************************************'))
             })
     }
 
