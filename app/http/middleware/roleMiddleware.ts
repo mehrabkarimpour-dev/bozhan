@@ -41,7 +41,11 @@ export class RoleMiddleware {
         // @ts-ignore
         return req.auth.roles = role?.dataValues?.roles ?? null
     }
-
+    /**
+     * @param req
+     * @param res
+     * @param next
+     */
     public async run(req: Request, res: Response, next: NextFunction) {
         // @ts-ignore
         if (!req.auth) return Middleware.needAuth(req, res)

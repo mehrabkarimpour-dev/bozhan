@@ -5,7 +5,7 @@ const fs = require("fs")
 
 let Exports: any = []
 
-function checkDirectoryExists(path: string) {
+async function checkDirectoryExists(path: string) {
     let pathArray = path.split('/')
     let newPathMustBeCreated: string = ''
     if (pathArray.length > 1) {
@@ -21,24 +21,37 @@ function checkDirectoryExists(path: string) {
     }
 }
 
-const cleanPath = (path: string) => {
+const cleanPath = async (path: string) => {
     if (path[0] !== '/') {
         path = '/' + path
     }
-    checkDirectoryExists('storage' + path)
+    if (path[path.length - 1] !== '/') {
+        path += '/'
+    }
+    await checkDirectoryExists('storage' + path)
+    return path
+}
+
+function cleanName(name: string) {
+    const first3 = name.substring(name.length - 4)
+    if (first3 !== '.csv') name += '.csv'
+    return name
+
 }
 
 Container._exports.map((Export: any) => {
     let _objExport = new Export()
-    _objExport.output = (...data: Array<object>) => {
+    _objExport.output = async (data: Array<object>, name: string = 'file.csv') => {
         let dataFormat = _objExport.run(...data)
-        cleanPath(_objExport.path)
-        const ws = fs.createWriteStream('storage/' + _objExport.path);
-        fastcsv.write(...dataFormat, {headers: true})
+        let path = await cleanPath(_objExport.path)
+        let clean_name = cleanName(name)
+
+        const ws = await fs.createWriteStream('storage/' + path + clean_name)
+        return fastcsv.write(dataFormat, {headers: true})
             .on("finish", function () {
-                console.log("Write to CSV successfully!");
+                return 'storage/' + _objExport.path
             })
-            .pipe(ws);
+            .pipe(ws).path
     }
     Exports[_objExport.name] = _objExport
 })

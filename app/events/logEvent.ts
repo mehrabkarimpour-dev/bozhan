@@ -5,7 +5,9 @@ export class LogEvent extends Dispatchable {
 
     public name: string = 'log'
 
-
+    /**
+     * @return Array
+     */
     public registerListeners() {
         return [
             /*TestListeners1,
@@ -13,6 +15,9 @@ export class LogEvent extends Dispatchable {
         ]
     }
 
+    /**
+     * @param parameters
+     */
     public run(...parameters: any) {
         for (let i = 0; i < 100000; i++) {
             console.log(i)

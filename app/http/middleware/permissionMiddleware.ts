@@ -40,8 +40,11 @@ export class PermissionMiddleware extends Middleware {
         // @ts-ignore
         return req.auth.permissions = role?.dataValues?.permissions ?? null
     }
-
-
+    /**
+     * @param req
+     * @param res
+     * @param next
+     */
     public async run(req: Request, res: Response, next: NextFunction) {
 
         // @ts-ignore

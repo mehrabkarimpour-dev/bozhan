@@ -1,13 +1,13 @@
 class TestExport {
 
     public name: string = 'TestExport'
-    public path: string = 'app/export/test/test/test.csv'
+    public path: string = `app/export/test/test`
 
     /**
      * @param data
      */
     public run(...data: Array<object>) {
-        // in this method you can edit data before converting to csv...
+        // edit data before converting to csv...
         return data
     }
 

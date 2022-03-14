@@ -20,7 +20,11 @@ export class AuthMiddleware {
     constructor(parameters: object | string | null = null) {
         AuthMiddleware.parameters = parameters
     }
-
+    /**
+     * @param req
+     * @param res
+     * @param next
+     */
     public async run(req: Request, res: Response, next: NextFunction) {
 
         if (req.headers.authorization && req.headers?.authorization?.split('Bearer')[1]) {
