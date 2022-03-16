@@ -55,6 +55,12 @@ export namespace Container {
     export const _exports: Array<object> = [
         testExport
     ]
+    /**
+     * imports
+     */
+    export const _imports: Array<object> = [
+        testExport
+    ]
 
 }
 

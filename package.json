@@ -58,6 +58,7 @@
     "cookie-parser": "^1.4.5",
     "cookie-signature": "^1.0.6",
     "crypto-js": "^4.1.1",
+    "csv-parser": "^3.0.0",
     "dayjs": "^1.10.7",
     "ddos": "^0.2.1",
     "debug": "^2.6.9",
