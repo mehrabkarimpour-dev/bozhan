@@ -1,14 +1,14 @@
 import express, {NextFunction, Request, request, Response, response} from 'express';
 
 
-
 declare global {
     namespace Express {
         interface Request {
-            auth: null
+            auth: object | null | Array<object>
         }
     }
 }
+
 declare global {
     namespace P {
         interface BaseLogger {

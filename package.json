@@ -203,7 +203,7 @@
     "production": "mix --production",
     "watch": "mix watch",
     "start": "node build/server.js",
-    "dev": "ts-node-dev --respawn server.ts"
+    "dev": "ts-node-dev  --watch .env  --respawn server.ts"
   },
   "keywords": [],
   "bin": {
