@@ -1,18 +1,26 @@
-import UserRepositoryInterface from "../../repositories/UserRepositoryInterface";
-
+import {Request, Response} from "express"
+import convert from 'xml-js'
 const autoBind = require('auto-bind')
-const {validationResult} = require("express-validator")
-var Recaptcha = require('express-recaptcha').RecaptchaV2
 
 export class Controller {
 
     public recaptcha: any = {};
 
-    //public repository;
-
     constructor() {
-        //autoBind(this)
-        this.recaptchaConfig()
+        autoBind(this)
+    }
+
+    public render = async (req: Request, res: Response, data: any) => {
+        switch (req.contentType) {
+            case 'application/json':
+                return res.json(data)
+            case 'application/xml':
+                let xmlResponse = convert.json2xml(data, {compact: true, ignoreComment: true, spaces: 4})
+                res.set('Content-Type', 'text/xml')
+                return res.send(xmlResponse)
+            default:
+                return res.render(req.agentView)
+        }
     }
 
     public addItemToArray(arr: any, key: string, value: any) {
@@ -22,44 +30,8 @@ export class Controller {
         return arr
     }
 
-    recaptchaConfig = () => {
-
-        this.recaptcha = new Recaptcha(
-            '6Lf5VlYcAAAAAOvXuZc2UE79X9_UIzLhzRQm6aOs',
-            '6Lf5VlYcAAAAAD_gSIHIYVVYu_394ihH78mu1NcJ',
-            {'hl': 'fa'}
-        )
-    }
-
-    recaptchaValidation = async (req: any, res: any, callbackUrl = '/auth/register') => {
-        return new Promise((resolve, reject) => {
-            this.recaptcha.verify(req, (error: any, data: any) => {
-                if (error) {
-                    req.flash('errors', ['لطفا تایید کنید که ربات نیستید'])
-                    res.redirect(callbackUrl)
-                }
-                if (data) {
-                    resolve(true)
-                }
-            })
-        })
-    }
-
     public parent = () => {
         return 'controller'
     }
-
-    /*validationData = async (req: any) => {
-        const result = await validationResult(req)
-        const errors = result.array()
-        let messages: any = []
-        errors.forEach((error: any) => messages.push(error.msg))
-
-        if (messages.length > 0)
-            req.flash('errors', messages)
-
-        return messages.length === 0
-    }*/
-
 
 }

@@ -8,6 +8,7 @@ import TestQueue from "../queue/testQueue";
 import UploadImage from "../fs/uploadImage";
 import testExport from "../export/testExport";
 import testImport from "../import/TestImport";
+import {userAgentMiddleware} from "../http/middleware/userAgentMiddleware";
 
 /**
  * Bozhan container namespace
@@ -26,7 +27,8 @@ export namespace Container {
         AuthMiddleware,
         loginRequest,
         RoleMiddleware,
-        PermissionMiddleware
+        PermissionMiddleware,
+        userAgentMiddleware
     ]
     /**
      * jobs

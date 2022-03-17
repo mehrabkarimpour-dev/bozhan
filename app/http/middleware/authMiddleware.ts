@@ -15,6 +15,8 @@ export class AuthMiddleware {
      *   ! information
      *  if params be equal to true for getting params you need
      *  in route passing all parameters to middleware in second param...
+     * @param parameters
+     * @author mehrab karimpour
      */
 
     constructor(parameters: object | string | null = null) {
@@ -24,6 +26,7 @@ export class AuthMiddleware {
      * @param req
      * @param res
      * @param next
+     * @author mehrab karimpour
      */
     public async run(req: Request, res: Response, next: NextFunction) {
 

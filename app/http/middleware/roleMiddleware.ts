@@ -13,17 +13,16 @@ export class RoleMiddleware {
     public static parameters: any = null
 
     /**
-     * if params be equal to true for getting params you need public params() method...
-     *    public params(param : string) {
-     *
-     *    }
+     *    @param parameters
+     * @author mehrab karimpour
      */
-
     constructor(parameters: object | string | null = null) {
         RoleMiddleware.parameters = parameters
     }
 
-
+    /**
+     * @param req
+     */
     public static async hasRole(req: Request) {
         let role = await db.User.findOne({
             include: {

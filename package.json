@@ -178,6 +178,7 @@
     "websocket-stream": "^5.5.2",
     "whatwg-url": "^9.1.0",
     "ws": "^8.2.3",
+    "xml-js": "^1.6.11",
     "yargs": "^17.2.1"
   },
   "devDependencies": {

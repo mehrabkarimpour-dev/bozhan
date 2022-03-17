@@ -4,7 +4,10 @@ import express, {NextFunction, Request, request, Response, response} from 'expre
 declare global {
     namespace Express {
         interface Request {
-            auth: object | null | Array<object>
+            auth: object | null | Array<object>,
+            contentType: string | null,
+            agentView: string,
+            userAgent: string
         }
     }
 }

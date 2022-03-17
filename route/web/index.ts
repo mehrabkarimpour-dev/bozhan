@@ -22,7 +22,9 @@ router.prefix('/', (route: any) => {
         middleware('permission', ['can']),
         controller(IndexController, 'test'))*/
 
-    route.get('/', controller(IndexController, 'index'))
+    route.get('/',
+        middleware('view', 'home'),
+        controller(IndexController, 'index'))
 
     route.prefix('/auth', (auth: any) => {
 

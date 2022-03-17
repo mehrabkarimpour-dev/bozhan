@@ -7,20 +7,23 @@ import Middleware from "./Middleware";
 export class PermissionMiddleware extends Middleware {
 
 
-
     public static _name: string = 'permission'
     public static hasParams: boolean = true
     public static parameters: any = null
 
     /**
      * if params be equal to true for getting params you need public params() method...
+     * @param parameters
+     * @author mehrab karimpour
      */
-
     constructor(parameters: object | string | null = null) {
         super();
         PermissionMiddleware.parameters = parameters
     }
-
+    /**
+     * @param req
+     * @author mehrab karimpour
+     */
     public static async hasPermission(req: Request) {
         let role = await db.User.findOne({
             include: {
