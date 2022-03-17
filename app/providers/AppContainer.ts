@@ -7,6 +7,7 @@ import TestJob from "../schedule/TestJob";
 import TestQueue from "../queue/testQueue";
 import UploadImage from "../fs/uploadImage";
 import testExport from "../export/testExport";
+import testImport from "../import/TestImport";
 
 /**
  * Bozhan container namespace
@@ -59,7 +60,7 @@ export namespace Container {
      * imports
      */
     export const _imports: Array<object> = [
-        testExport
+        testImport
     ]
 
 }
