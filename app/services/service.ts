@@ -1,6 +1,6 @@
 export default class Service {
 
-    public  constructor(service: any) {
+    public constructor(service: any) {
         return new service();
     }
 }

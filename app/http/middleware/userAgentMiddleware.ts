@@ -24,7 +24,7 @@ export class userAgentMiddleware {
      * @author mehrab karimpour
      */
     public async run(req: Request, res: Response, next: NextFunction) {
-        req.contentType = req.headers['content-type'] ?? null
+        req.contentType = req.headers['content-type'] ?? 'html'
         req.agentView = userAgentMiddleware.parameters ?? 'home'
         return next()
     }

@@ -21,7 +21,7 @@ class IndexController extends Controller {
      * @param res
      */
     public index = async (req: Request, res: Response) => {
-        return res.render('home')
+        return this.render(req, res, {})
     }
 
 }

@@ -1,7 +1,10 @@
+import {Request, Response} from "express";
+
 export default abstract class ResponseAbstract {
 
-    public type: string | undefined
+    readonly abstract type: string
 
-    abstract converter(): any
+    public abstract converter(req: Request, res: Response, ...data: any): any;
+
 
 }

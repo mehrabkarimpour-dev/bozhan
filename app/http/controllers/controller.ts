@@ -1,5 +1,7 @@
 import {Request, Response} from "express"
-import convert from 'xml-js'
+import AppResponse from "../../services/response/response";
+import {injectableServiceProvider} from "../../providers/injectableServiceProvider";
+
 const autoBind = require('auto-bind')
 
 export class Controller {
@@ -10,17 +12,9 @@ export class Controller {
         autoBind(this)
     }
 
-    public render = async (req: Request, res: Response, data: any) => {
-        switch (req.contentType) {
-            case 'application/json':
-                return res.json(data)
-            case 'application/xml':
-                let xmlResponse = convert.json2xml(data, {compact: true, ignoreComment: true, spaces: 4})
-                res.set('Content-Type', 'text/xml')
-                return res.send(xmlResponse)
-            default:
-                return res.render(req.agentView)
-        }
+    public render = async (req: Request, res: Response, data: any = null) => {
+        let appResponse = injectableServiceProvider.bind(AppResponse)
+        return appResponse.response(req, res, data)
     }
 
     public addItemToArray(arr: any, key: string, value: any) {

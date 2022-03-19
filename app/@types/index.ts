@@ -5,7 +5,7 @@ declare global {
     namespace Express {
         interface Request {
             auth: object | null | Array<object>,
-            contentType: string | null,
+            contentType: string,
             agentView: string,
             userAgent: string
         }
