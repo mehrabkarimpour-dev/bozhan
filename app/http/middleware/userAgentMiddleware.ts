@@ -21,7 +21,6 @@ export class userAgentMiddleware {
      * @param req
      * @param res
      * @param next
-     * @author mehrab karimpour
      */
     public async run(req: Request, res: Response, next: NextFunction) {
         req.contentType = req.headers['content-type'] ?? 'html'

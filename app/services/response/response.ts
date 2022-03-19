@@ -1,12 +1,14 @@
 import {Request, Response} from "express";
 import Html from "./parts/html";
 import Json from "./parts/json";
+import Xml from "./parts/xml";
 
 export default class AppResponse {
 
     public responses: Array<object> | undefined = [
         Html,
-        Json
+        Json,
+        Xml
     ]
 
     public response(req: Request, res: Response, ...data: any) {

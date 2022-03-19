@@ -3,7 +3,7 @@ import logger from "../../../config/logger";
 import modelObServerAble from "../../../vendor/core/observer/database/modelObServerAble";
 
 
-export abstract class BaseRepository extends modelObServerAble implements ReadInterface, WriteInterface,RunObserverInterface {
+export abstract class BaseRepository extends modelObServerAble implements ReadInterface, WriteInterface, RunObserverInterface {
 
 
     public model: any
@@ -15,15 +15,15 @@ export abstract class BaseRepository extends modelObServerAble implements ReadIn
         this.observer = observer
     }
 
-    public runObserver(observer: any, type: string){
+    public runObserver(observer: any, type: string) {
 
     }
 
     public find(field: string, value: any) {
         try {
-            let user= this.model.findOne({where: {[field]: value}})
+            let user = this.model.findOne({where: {[field]: value}})
             this.attach(this.observer)
-            return  user
+            return user
         } catch (e) {
             logger.error({e})
             return null;
