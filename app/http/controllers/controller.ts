@@ -14,7 +14,7 @@ export class Controller {
 
     public render = async (req: Request, res: Response, data: any = null) => {
         let appResponse = injectableServiceProvider.bind(AppResponse)
-        return appResponse.response(req, res, data)
+        return appResponse.response(req, res, ...data)
     }
 
     public addItemToArray(arr: any, key: string, value: any) {

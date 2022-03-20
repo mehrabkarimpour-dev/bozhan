@@ -11,7 +11,7 @@ export default class Json extends ResponseAbstract {
      * @param data
      */
     public converter(req: Request, res: Response, ...data: any): any {
-        res.status(data.status ?? 200).json(data)
+        res.json(data)
     }
 
 }
