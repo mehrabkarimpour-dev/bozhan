@@ -10,8 +10,8 @@ export default class Html extends ResponseAbstract {
      * @param res
      * @param data
      */
-    public converter(req: Request, res: Response, ...data: any): any {
-        return res.render(req.agentView)
+    public converter(req: Request, res: Response, data: any): any {
+        return res.render(req.agentView, {data})
     }
 
 }
