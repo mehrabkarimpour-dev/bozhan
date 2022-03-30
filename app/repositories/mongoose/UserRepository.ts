@@ -5,10 +5,11 @@ import user from 'app/models/mongoose/user'
 
 export class UserRepository extends BaseRepository implements UserRepositoryInterface {
 
-    public UserModel: any;
+    public UserModel: any
 
     constructor() {
-        super(user);
+        super(user)
+        this.UserModel = user
     }
 
 

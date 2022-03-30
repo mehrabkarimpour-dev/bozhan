@@ -35,6 +35,7 @@ import declares from "../app/@types";
 import peer from "../app/web-rtc/peer";
 import chalk from "chalk";
 import {Schedule} from "../vendor/core/schedule/schedule";
+import {boolean} from "yargs";
 
 const app = express()
 
@@ -55,6 +56,16 @@ class Index {
         this.setQueueJob()
         this.setEventConfig()
         this.setWebRtcConfig()
+        this.activeServices()
+    }
+
+
+    public activeServices() {
+        setTimeout(() => {
+            console.log(chalk.cyan(`---------------Active Services------- `))
+            console.log(chalk.cyan(` ${process.env.ACTIVE_MONGODB == 'true' ? 'mongo' : ''}             `))
+            console.log(chalk.cyan(`--------------------------------------- `))
+        })
     }
 
     public setWebRtcConfig() {
@@ -105,28 +116,18 @@ class Index {
             });
         else
             this.expressApp.listen(appConfig.port, () => {
-                console.log(chalk.blue(` server : express`))
                 console.log(chalk.blue(` port : ${process.env.APP_PORT || 5000}`))
                 console.log(chalk.blue(` HOST : ${process.env.HOST || 'localhost'}`))
-                console.log(chalk.blue('***********************************************************'))
             })
     }
 
     public setDatabaseConfig() {
 
-        // mongoose.connect(databaseConfig.mongoUrl).then(res => {
-        //     console.log('mongo db has connected...')
-        // })
-        /*switch (database) {
-            case 'mongodb':
-                mongoose.connect(databaseConfig.mongoUrl).then(res => {
-                    console.log('mongo db has connected...')
-                })
-            /!*mongoose.Promise = global.Promise
-            mongoose.connect('').then(res:any => {
-                console.log('mongo db has connected  successfully...')
-            })*!/
-        }*/
+        if (process.env.ACTIVE_MONGODB == 'true')
+            mongoose.connect(databaseConfig.mongoUrl).then(res => {
+            }).catch(err=>{
+                throw err
+            })
     }
 
     public setRoutersConfig() {

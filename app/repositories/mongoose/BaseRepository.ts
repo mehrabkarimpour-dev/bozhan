@@ -17,9 +17,9 @@ export class BaseRepository implements ReadInterface, WriteInterface {
         throw new Error("Method not implemented.");
     }
 
-    all(): void | object {
+     all(): void | object {
         try {
-            return this.model.findAll({})
+            return this.model.find({})//.lean()
         } catch (e) {
             // @ts-ignore
             logger.error(e)
