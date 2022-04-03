@@ -21,15 +21,15 @@ schema.pre('save', function (next) {
 })
 
 schema.pre('init', function () {
-    console.log('save middleware')
+    // save middleware
 })
 
 schema.pre('remove', function () {
-    console.log('remove middleware')
+    // remove middleware
 })
 
 schema.pre('find', function () {
-    console.log('setter ')
+    // setter
 })
 
 export default model<User>('User', schema)

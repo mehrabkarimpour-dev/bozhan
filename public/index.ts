@@ -1,11 +1,11 @@
 import "reflect-metadata"
-import express, {NextFunction, Request, request, Response, response} from 'express';
-import db from '../app/models/sequelize';
-import mongoose from "mongoose";
-import bodyParser from "body-parser";
-import appConfig from "config/app";
+import express, {NextFunction, Request, request, Response, response} from 'express'
+import db from '../app/models/sequelize'
+import mongoose from "mongoose"
+import bodyParser from "body-parser"
+import appConfig from "config/app"
 import databaseConfig from '../config/database'
-import Passport from "../app/auth/passport";
+import Passport from "../app/auth/passport"
 import Queue from 'bull';
 
 const cookieParser = require('cookie-parser')
@@ -16,16 +16,17 @@ const session = require('express-session')
 const routeCache = require('route-cache')
 
 import Config from "../vendor/config/Config"
-import http from 'http';
-import webRouter from '../route/web/index';
-import apiRouter from '../route/api/index';
-import {config} from "dotenv";
-import wb from "../app/socket/ws";
-import SocketIo from "../app/socket/socket.io";
+import http from 'http'
+import webRouter from '../route/web/index'
+import apiRouter from '../route/api/index'
+import {config} from "dotenv"
+import wb from "../app/socket/ws"
+import SocketIo from "../app/socket/socket.io"
 import {graphqlHTTP} from 'express-graphql'
-import {schema, root} from "../app/graphql/schema";
-/*import Graphql from "../app/graphql";*/
-/*import graphqlHttp from "express-graphql";*/
+import {schema, root} from "../app/graphql/schema"
+import 'app/models/mongoose/index'
+/*import Graphql from "../app/graphql"*/
+/*import graphqlHttp from "express-graphql"*/
 import welcome from "../vendor/core/cli/welcome";
 import cli from "../vendor/core/cli/cli";
 import {redisConfig} from "../config/database";
@@ -63,7 +64,12 @@ class Index {
     public activeServices() {
         setTimeout(() => {
             console.log(chalk.cyan(`---------------Active Services------- `))
-            console.log(chalk.cyan(` ${process.env.ACTIVE_MONGODB == 'true' ? 'mongo' : ''}             `))
+            let actives: string = ''
+            actives += ` ${process.env.ACTIVE_MONGODB == 'true' ? 'mongo' : ''} `
+            actives += ` ${process.env.ACTIVE_REDIS == 'true' ? 'redis ' : ''}`
+            actives += ` ${process.env.ACTIVE_RELATION == 'true' ? process.env.DB_DIALECT +' ' : ''}`
+            actives += ` ${process.env.ACTIVE_ELASTIC == 'true' ? 'elastic  ' : ''}`
+            console.log(chalk.cyan(actives))
             console.log(chalk.cyan(`--------------------------------------- `))
         })
     }
@@ -108,10 +114,9 @@ class Index {
 
     public setExpressConfig() {
         this.expressApp = http.createServer(app)
-        if (process.env.RELATION_BE_ACTIVE)
+        if (process.env.RELATION_BE_ACTIVE === 'true')
             db.sequelize.sync().then(() => {
                 this.expressApp.listen(appConfig.port, () => {
-                    console.log(chalk.blue(`express server running on port ${process.env.APP_PORT || 5000} successfully...`))
                 })
             });
         else
@@ -123,11 +128,6 @@ class Index {
 
     public setDatabaseConfig() {
 
-        if (process.env.ACTIVE_MONGODB == 'true')
-            mongoose.connect(databaseConfig.mongoUrl).then(res => {
-            }).catch(err=>{
-                throw err
-            })
     }
 
     public setRoutersConfig() {
