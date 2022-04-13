@@ -1,9 +1,10 @@
-import * as socketIo from "socket.io";
-import Socket from "../../../vendor/core/socket/Socket";
-import SocketInterface from "../../../vendor/core/socket/SocketInterface";
+import * as socketIo from "socket.io"
+import Socket from "../../../vendor/core/socket/Socket"
+import SocketInterface from "../../../vendor/core/socket/SocketInterface"
+import ShouldNotificationInterface from "../../../vendor/core/notification/ShouldNotificationInterface"
 
 
-class SocketIo extends Socket implements SocketInterface {
+class SocketIo extends Socket implements SocketInterface, ShouldNotificationInterface {
 
     public ws: any
 
@@ -19,6 +20,11 @@ class SocketIo extends Socket implements SocketInterface {
             // we have a  new connection
         })
     }
+
+    push(message: string): any {
+        // this.ws.emit('channel',message)
+    }
+
 }
 
 export default new SocketIo
