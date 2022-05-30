@@ -16,31 +16,32 @@ router.prefix('/', (route: any) => {
     * role permission middleware example...
     * you can define role permission in database or redis
     * */
-    /*route.get('/',
-        middleware('auth'),
-        middleware('role', ['admin']),
-        middleware('permission', ['can']),
-        controller(IndexController, 'test'))*/
 
     route.get('/',
-        middleware('view', 'home'),
-        controller(IndexController, 'index'))
+        middleware('agent'),
+        controller(IndexController, 'index', 'home'))
 
     route.prefix('/auth', (auth: any) => {
 
         auth.post('/login',
+            middleware('agent'),
             validate(LoginRequest),
             handleErrors(LoginRequest),
             controller(LoginController, 'index'))
 
         auth.post('/register',
+            middleware('agent'),
             validate(RegisterRequest),
             handleErrors(RegisterRequest),
             controller(RegisterController, 'register'), // first register
             controller(LoginController, 'index'))     // login user after register
 
-        auth.get('/register', controller(RegisterController, 'register'), controller(LoginController, 'index'))
+        auth.get('/register',
+            middleware('agent'),
+            controller(RegisterController, 'register'),
+            controller(LoginController, 'index'))
         auth.get('/logout',
+            middleware('agent'),
             middleware('auth'),
             controller(LogoutController, 'index'))
     })

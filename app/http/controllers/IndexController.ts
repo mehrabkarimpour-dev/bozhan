@@ -21,15 +21,7 @@ class IndexController extends Controller {
      * @param res
      */
     public index = async (req: Request, res: Response) => {
-        let data = [
-            {
-                id: 1
-            },
-            {
-                id: 2
-            }
-        ]
-        return this.render(req, res, data)
+        return this.render(req, res)
     }
 
 }

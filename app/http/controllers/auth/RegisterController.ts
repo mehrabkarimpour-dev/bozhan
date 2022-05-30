@@ -20,7 +20,6 @@ class RegisterController extends Controller {
         const hash = crypto.createHash('sha256').update('121212').digest('hex');
 
         let newUserParams = {
-            organizationId: req.body.organizationId,
             mobile: req.body.mobile,
             password: hash,
             firstName: req.body.firstName,

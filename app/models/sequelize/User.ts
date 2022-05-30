@@ -5,7 +5,6 @@ import UserStateEnum from "../../enums/UserStateEnum";
 
 interface UserAttributes {
     id: string
-    organizationId: number
     mobile: string
     password: string
     firstName: string
@@ -27,7 +26,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
 
 
         id!: string
-        organizationId!: number
         mobile!: string
         password!: string
         firstName!: string
@@ -63,10 +61,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 validate: {
                     notEmpty: true
                 }
-            },
-            organizationId: {
-                type: DataTypes.INTEGER,
-                allowNull: true
             },
             mobile: {
                 allowNull: false,

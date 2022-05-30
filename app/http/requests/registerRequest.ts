@@ -14,7 +14,6 @@ class RegisterRequest extends RequestsForm {
 
 
     public static validParams: object = [
-        'organizationId',
         'mobile',
         'password',
         'firstName',
@@ -36,8 +35,6 @@ class RegisterRequest extends RequestsForm {
 
     public validate() {
         return [
-            body('organizationId').not().isEmpty().withMessage(required('سازمان'))
-                .isInt().withMessage(integer('سازمان')),
 
             body('mobile').not().isEmpty().withMessage(required(' شماره موبایل '))
                 .isLength({min: 11}).withMessage(min('  شماره موبایل ', ' 11 '))

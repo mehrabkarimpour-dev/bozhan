@@ -26,8 +26,9 @@ export function upload(uploadName: string, fileName: Array<string | number> | st
     }
 }
 
-export function controller(controller: any, method: string) {
+export function controller(controller: any, method: string, view: string = 'home') {
     let ctl = new controller()
+    ctl.agentView = view
     return ctl[method];
 }
 

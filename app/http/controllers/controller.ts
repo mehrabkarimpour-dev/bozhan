@@ -7,6 +7,7 @@ const autoBind = require('auto-bind')
 export class Controller {
 
     public recaptcha: any = {};
+    public agentView: string = 'home';
 
     constructor() {
         autoBind(this)
@@ -14,6 +15,7 @@ export class Controller {
 
     public render = async (req: Request, res: Response, data: any = null) => {
         let appResponse = injectableServiceProvider.bind(AppResponse)
+        req.agentView = this.agentView
         return appResponse.response(req, res, data)
     }
 
