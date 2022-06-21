@@ -1,7 +1,6 @@
 import {BaseRepository} from "./BaseRepository";
 import db from '../../models/sequelize';
 import UserRepositoryInterface from "../UserRepositoryInterface";
-import UserObserver from "../../observers/UserObserver";
 
 
 export class UserRepository extends BaseRepository implements UserRepositoryInterface {
@@ -9,7 +8,7 @@ export class UserRepository extends BaseRepository implements UserRepositoryInte
     public UserModel: any;
 
     constructor() {
-        super(db.User, UserObserver);
+        super(db.User);
         this.UserModel = db.User;
     }
 

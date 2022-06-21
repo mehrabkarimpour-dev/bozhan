@@ -1,13 +1,7 @@
-import {LogEvent} from "../events/logEvent";
 import {AuthMiddleware} from "../http/middleware/authMiddleware";
 import loginRequest from "../http/requests/loginRequest";
 import {RoleMiddleware} from "../http/middleware/roleMiddleware";
 import {PermissionMiddleware} from "../http/middleware/permissionMiddleware";
-import TestJob from "../schedule/TestJob";
-import TestQueue from "../queue/testQueue";
-import UploadImage from "../fs/uploadImage";
-import testExport from "../export/testExport";
-import testImport from "../import/TestImport";
 import {agentMiddleware} from "../http/middleware/agentMiddleware";
 
 /**
@@ -18,7 +12,7 @@ export namespace Container {
      * events
      */
     export const _events: Array<object> = [
-        LogEvent
+
     ]
     /**
      * middlewares
@@ -34,13 +28,13 @@ export namespace Container {
      * jobs
      */
     export const _jobs: Array<object> = [
-        TestJob
+
     ]
     /**
      * queues
      */
     export const _queues: Array<object> = [
-        TestQueue
+
     ]
     /**
      * commands
@@ -50,19 +44,19 @@ export namespace Container {
      * uploads
      */
     export const _uploads: Array<object> = [
-        UploadImage
+
     ]
     /**
      * exports
      */
     export const _exports: Array<object> = [
-        testExport
+
     ]
     /**
      * imports
      */
     export const _imports: Array<object> = [
-        testImport
+
     ]
 
 }

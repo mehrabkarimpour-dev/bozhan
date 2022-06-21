@@ -9,8 +9,12 @@ export default abstract class ElasticAbstract {
         this.client = new Client({node: `${elasticConfig.url}:${elasticConfig.port}`})
     }
 
-    abstract search(index: string, match: object): Promise<object | null>
+    abstract sql(sqlQuery: string):any
 
-    abstract index(index: string, doc: object):  Promise<boolean | undefined | null>
+    abstract searchMach(index: string, match: object): Promise<object | null>
+
+    abstract searchMachs(index: string, query: string, fields: []|any): Promise<object | null>
+
+    abstract index(index: string, doc: object): Promise<boolean | undefined | null>
 
 }

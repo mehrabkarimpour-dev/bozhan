@@ -1,6 +1,5 @@
 'use strict';
 import {Model} from 'sequelize';
-import UserStateEnum from "../../enums/UserStateEnum";
 
 
 interface UserAttributes {
@@ -11,7 +10,6 @@ interface UserAttributes {
     lastName: string
     token: string
     email: string
-    state: string
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -32,7 +30,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
         lastName!: string
         token!: string
         email!: string
-        state!: string
 
         static associate(models: any) {
 
@@ -86,11 +83,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
             email: {
                 allowNull: true,
                 type: DataTypes.STRING
-            },
-            state: {
-                allowNull: true,
-                type: DataTypes.ENUM(UserStateEnum),
-                defaultValue: UserStateEnum[0]
             }
         }
         , {
